@@ -16,7 +16,7 @@
 
 ### 方式 A：网页上传
 
-1. 解压 `AnimeRenamer-v1.0.7-github.zip`
+1. 解压 `AnimeRenamer-v1.0.9-github.zip`
 2. 打开解压后的 `AnimeRenamer` 文件夹
 3. 在 GitHub 仓库页面点击 **Add file → Upload files**
 4. 把文件夹里的**所有内容**拖进去（不是把外层文件夹拖进去）
@@ -28,7 +28,7 @@
 cd AnimeRenamer
 git init
 git add .
-git commit -m "Initial release v1.0.7"
+git commit -m "Initial release v1.0.9"
 git branch -M main
 git remote add origin https://github.com/<你的用户名>/AnimeRenamer.git
 git push -u origin main
@@ -37,9 +37,9 @@ git push -u origin main
 ## 三、发布 Release
 
 1. 仓库页面右侧 **Releases → Draft a new release**
-2. Tag 填 `v1.0.7`
-3. 标题填 `AnimeRenamer v1.0.7`
-4. 上传附件：`AnimeRenamer_v1.0.7_windows.zip`
+2. Tag 填 `v1.0.9`
+3. 标题填 `AnimeRenamer v1.0.9`
+4. 上传附件：`AnimeRenamer_v1.0.9_windows.zip`
 5. 发布
 
 这个 zip 里包含 EXE 和使用说明，普通用户下载解压后双击即可。

@@ -4,7 +4,7 @@
 
 ![platform](https://img.shields.io/badge/platform-Windows%2010%20%7C%2011-0078D4)
 ![.NET](https://img.shields.io/badge/.NET%20Framework-4.x-512BD4)
-![version](https://img.shields.io/badge/version-1.0.7-4F6BED)
+![version](https://img.shields.io/badge/version-1.0.9-4F6BED)
 ![license](https://img.shields.io/badge/license-MIT-green)
 
 ![主界面](docs/main.png)
@@ -18,9 +18,15 @@
 - 直接下载：[`dist/AnimeRenamer.exe`](dist/AnimeRenamer.exe)
 - 或到 [Releases](../../releases/latest) 下载带说明的压缩包
 
-单文件绿色版，约 186 KB，无需安装。支持 Windows 10 / 11（系统自带 .NET Framework 4.x）。
+单文件绿色版，约 188 KB，无需安装。支持 Windows 10 / 11（系统自带 .NET Framework 4.x）。
 
 > 程序没有代码签名。首次运行如果出现 **“Windows 已保护你的电脑”**，点击 **“更多信息 → 仍要运行”** 即可。这是未签名程序的正常提示。
+
+## 更新日志
+
+- **v1.0.9**：支持 `番外篇08cut.mp4` 这类数字后带 `cut` / `fix` / `v2` / `修正` 的集数。
+- **v1.0.8**：支持 `番外篇03.mp4` 这类中文紧贴数字的集数。
+- **v1.0.7**：卡片与按钮边缘收边，修复不同 DPI 下的角部缺口。
 
 ## 三步完成
 
@@ -108,7 +114,7 @@ build.bat
 powershell -ExecutionPolicy Bypass -File build.ps1
 ```
 
-构建产物位于 `dist\AnimeRenamer.exe`。`build.ps1 -Test` 会在编译后运行内置自测（37 项）。
+构建产物位于 `dist\AnimeRenamer.exe`。`build.ps1 -Test` 会在编译后运行内置自测（55 项）。
 
 GitHub Actions 会在 `windows-latest` 上自动构建并上传 EXE 产物，见 [`.github/workflows/build.yml`](.github/workflows/build.yml)。
 

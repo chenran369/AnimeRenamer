@@ -9,7 +9,7 @@ namespace AnimeRenamer
 {
     public static class Program
     {
-        public const string VersionText = "1.0.7";
+        public const string VersionText = "1.0.9";
         public static string DataDir;
         public static string DataDirNote = "";
 

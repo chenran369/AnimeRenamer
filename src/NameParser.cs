@@ -44,7 +44,7 @@ namespace AnimeRenamer
                 第\s*[0-9一二三四五六七八九十]+\s*[季期]
             )\b", RegexOptions.Compiled);
 
-        private static readonly Regex ReAudioDecimal = new Regex(@"\b\d{1,2}\.\d(?:\.\d)?\b", RegexOptions.Compiled);
+        private static readonly Regex ReAudioDecimal = new Regex(@"(?<!\d)\d{1,2}\.\d{1,2}(?!\d)", RegexOptions.Compiled);
 
         private static readonly Regex ReSxxExx = new Regex(
             @"(?i)(?:^|[^a-z0-9])s(\d{1,2})[\s._-]*e(?:p)?[\s._-]*(\d{1,4})(?:v\d+)?",
@@ -65,8 +65,14 @@ namespace AnimeRenamer
             RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         private static readonly Regex ReDashEp = new Regex(
-            @"(?i)(?:^|[\s._-])(\d{1,4})(?:v\d+)?(?:end|fin|完)?(?:[\s._-]|$)",
+            @"(?i)(?<!\d\.)(?:^|[\s._-])(\d{1,4})(?:v\d+|cut|fix|end|fin|完|修正|修复){0,3}(?!\.\d)(?:[\s._-]|$)",
             RegexOptions.Compiled);
+
+        // "番外篇03" / "番外篇08cut" style: a number glued directly to a CJK
+        // character, optionally followed by cut/fix/v2/话 etc.
+        private static readonly Regex ReCjkTail = new Regex(
+            @"(?<=[\u4e00-\u9fff\u3040-\u30ff])(\d{1,3})(?:v\d+|cut|fix|end|fin|完|修正|修复|[话話集]){0,3}(?!\.\d)(?=$|[\s._\-\]\)\]】）])",
+            RegexOptions.Compiled | RegexOptions.IgnoreCase);
 
         private static readonly Regex ReSpecial = new Regex(
             @"(?i)(?:^|[^a-z0-9])(sp|ova|oad|specials?|ex)[\s._-]*(\d{1,3})?(?:[\s._-]|$)",
@@ -178,6 +184,13 @@ namespace AnimeRenamer
             }
 
             ms = ReDashEp.Matches(probe);
+            for (int i = ms.Count - 1; i >= 0; i--)
+            {
+                int n = SafeInt(ms[i].Groups[1].Value);
+                if (ValidEpisode(n)) return n;
+            }
+
+            ms = ReCjkTail.Matches(stem);
             for (int i = ms.Count - 1; i >= 0; i--)
             {
                 int n = SafeInt(ms[i].Groups[1].Value);

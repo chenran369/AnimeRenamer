@@ -35,6 +35,24 @@ namespace AnimeRenamer
             check("episode: number in title", NameParser.Parse("[Group] Title 2 - 05 [1080p].mkv").Episode == 5, "expected 5 (not 2)");
             check("episode: no false positive", NameParser.Parse("[Group] Title [1080p][5.1].mkv").Episode == -1, "expected -1");
             check("episode: chinese ji", NameParser.Parse("Title - 第5集.mkv").Episode == 5, "expected 5");
+            check("episode: cjk glued", NameParser.Parse("轮到你了 番外篇03.mp4").Episode == 3, "expected 3");
+            check("episode: cjk glued cut", NameParser.Parse("轮到你了 番外篇08cut.mp4").Episode == 8, "expected 8");
+            check("episode: cjk glued CUT", NameParser.Parse("番外篇09CUT.mp4").Episode == 9, "expected 9");
+            check("episode: cjk glued fix", NameParser.Parse("番外篇10fix.mp4").Episode == 10, "expected 10");
+            check("episode: cjk glued xiuzheng", NameParser.Parse("番外篇11修正.mp4").Episode == 11, "expected 11");
+            check("episode: dash cut", NameParser.Parse("Title - 12cut.mkv").Episode == 12, "expected 12");
+            check("episode: cjk cut resolution", NameParser.Parse("番外篇13cut 1080p.mp4").Episode == 13, "expected 13");
+            check("episode: cjk decimal cut", NameParser.Parse("番外篇5.1cut.mp4").Episode == -1, "expected -1");
+            check("episode: cjk 1080cut", NameParser.Parse("番外篇1080cut.mp4").Episode == -1, "expected -1");
+            check("episode: cjk 2019cut", NameParser.Parse("番外篇2019cut.mp4").Episode == -1, "expected -1");
+            check("episode: latin cut rejected", NameParser.Parse("Title03cut.mp4").Episode == -1, "expected -1");
+            check("episode: cjk glued bracket", NameParser.Parse("[Group] 轮到你了 番外篇03 [1080p].mp4").Episode == 3, "expected 3");
+            check("episode: cjk glued hua", NameParser.Parse("番外篇03话.mp4").Episode == 3, "expected 3");
+            check("episode: cjk glued v2", NameParser.Parse("番外篇03v2.mp4").Episode == 3, "expected 3");
+            check("episode: cjk year", NameParser.Parse("番外篇2019.mp4").Episode == -1, "expected -1");
+            check("episode: cjk 1080", NameParser.Parse("番外篇1080.mp4").Episode == -1, "expected -1");
+            check("episode: cjk decimal", NameParser.Parse("番外篇5.1.mp4").Episode == -1, "expected -1");
+            check("episode: latin glued rejected", NameParser.Parse("Title03.mkv").Episode == -1, "expected -1");
             check("extra: ncop", NameParser.Parse("[Group] Title [NCOP01][1080p].mkv").IsExtra, "expected extra");
             check("special: sp", NameParser.Parse("Title SP03.mkv").IsSpecial && NameParser.Parse("Title SP03.mkv").Episode == 3, "expected SP 3");
 
